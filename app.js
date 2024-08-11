@@ -1,10 +1,27 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
+const cors= require("cors")
 // const path = require("path");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "config/config.env" });
 }
+
+const allowedOrigins = ['https://linkup-frontend1.onrender.com', 'http://localhost:3000'];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+};
+
+app.use(cors(corsOptions));
+
+
 
 // Using Middlewares
 app.use(express.json({ limit: "50mb" }));
