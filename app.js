@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "config/config.env" });
 }
 
-const allowedOrigins = ['https://linkup-frontend1.onrender.com', 'http://localhost:3000'];
+const allowedOrigins = ['https://linkup-frontend1.onrender.com', 'http://localhost:3000', "*"];
 
 const corsOptions = {
     origin: (origin, callback) => {
@@ -16,7 +16,10 @@ const corsOptions = {
         } else {
             callback(new Error('Not allowed by CORS'));
         }
-    }
+    },
+    credentials: true,
+    allowedHeaders: ['Authorization', 'Content-Type'],
+
 };
 
 app.use(cors(corsOptions));
