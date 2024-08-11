@@ -7,7 +7,8 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "config/config.env" });
 }
 
-const allowedOrigins = ['https://linkup-frontend1.onrender.com', 'http://localhost:3000', "https://66b8d947a3dcf17e61b48741--dreamy-souffle-ec5564.netlify.app/"];
+
+const allowedOrigins = ['https://linkup-frontend1.onrender.com', 'http://localhost:3000',"https://66b8d947a3dcf17e61b48741--dreamy-souffle-ec5564.netlify.app/"];
 
 const corsOptions = {
     origin: (origin, callback) => {
@@ -17,13 +18,11 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true,
-    allowedHeaders: ['Authorization', 'Content-Type'],
-
+    credentials: true, // If you're using cookies or sessions
+    allowedHeaders: ['Authorization', 'Content-Type'], // Ensure headers you need are allowed
 };
 
 app.use(cors(corsOptions));
-
 
 
 // Using Middlewares
