@@ -9,20 +9,12 @@ if (process.env.NODE_ENV !== "production") {
 
 app.use(cors());
 
-const allowedOrigins = ['https://linkup-frontend1.onrender.com', 'http://localhost:3000'];
-
+// Advanced setup: Allow only your frontend domain
 const corsOptions = {
-    origin: (origin, callback) => {
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true, // If you're using cookies or sessions
-    allowedHeaders: ['Authorization', 'Content-Type'], // Ensure headers you need are allowed
+  origin: 'http://localhost:3000/', // Replace with your frontend's domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  credentials: true, // Enable cookies and HTTP authentication
 };
-
 app.use(cors(corsOptions));
 
 
