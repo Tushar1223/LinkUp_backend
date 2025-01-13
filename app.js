@@ -8,22 +8,26 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 
-// const allowedOrigins = ['https://linkup-frontend1.onrender.com', 'http://localhost:3000'];
+const allowedOrigins = [
+  'https://linkup-frontend1.onrender.com', // Render frontend (if applicable)
+  'https://link-up-two.vercel.app', // Replace with your actual Vercel frontend domain
+  'http://localhost:3000', // Local development
+];
 
-// const corsOptions = {
-//     origin: (origin, callback) => {
-//         if (allowedOrigins.includes(origin) || !origin) {
-//             callback(null, true);
-//         } else {
-//             callback(new Error('Not allowed by CORS'));
-//         }
-//     },
-//     credentials: true, // If you're using cookies or sessions
-//     allowedHeaders: ['Authorization', 'Content-Type'], // Ensure headers you need are allowed
-// };
+// CORS configuration
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // Allow credentials (cookies, sessions, etc.)
+  allowedHeaders: ['Authorization', 'Content-Type'], // Ensure necessary headers are allowed
+};
 
-app.use(cors());
-
+app.use(cors(corsOptions));
 
 // Using Middlewares
 app.use(express.json({ limit: "50mb" }));
