@@ -27,8 +27,12 @@ const corsOptions = {
   allowedHeaders: ['Authorization', 'Content-Type'], // Ensure necessary headers are allowed
 };
 
-app.use(cors(corsOptions));
-
+app.use(
+  cors({
+    origin: "https://link-up-two.vercel.app",
+    credentials: true,
+  })
+);
 // Using Middlewares
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
